@@ -37,7 +37,7 @@ label{
     border-color: var(--text-color);
     border: 1px;
     border-style: solid;
-    padding: 15vh 7vw;
+    padding: 10vh 7vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,3 +57,14 @@ label{
     display: flex;
     flex-direction: row;
 }
+
+.registration-text{
+    text-align: center;
+
+    margin-top: 1.5vh;
+}
+
+.registration-text p {
+    margin-bottom: 0.4vh;
+}
+
