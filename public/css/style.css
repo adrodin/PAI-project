@@ -10,6 +10,7 @@ p{
 }
 
 body{
+
     display: flex;
     flex-direction: row;
     margin: 0;
@@ -108,4 +109,12 @@ nav {
 }
 .fas{
     margin: auto 0 auto auto;
+}
+
+.nf{
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    left: 45%;
+    top: 35%;
 }

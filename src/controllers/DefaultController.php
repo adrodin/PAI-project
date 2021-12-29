@@ -8,13 +8,17 @@ class DefaultController extends AppController {
     {
         $this->render('rank');
     }
-    public function login()
+    public function loadgin()
     {
         $this->render('login');
     }
 
     public function rank(){
         $this->render('rank');
+    }
+
+    public function notFound(){
+        $this->render('notFound');
     }
 
 }
