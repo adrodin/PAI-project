@@ -10,4 +10,5 @@ Router::get('login', 'DefaultController');
 Router::get('rank', 'DefaultController');
 Router::get('notFound','DefaultController');
 Router::get('registration', 'DefaultController');
+Router::get('user_ratings','DefaultController');
 Router::run($path);

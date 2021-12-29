@@ -24,5 +24,8 @@ class DefaultController extends AppController {
     public function notFound(){
         $this->render('notFound');
     }
+    public function user_ratings(){
+        $this->render('user_ratings');
+    }
 
 }
