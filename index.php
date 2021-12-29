@@ -9,4 +9,5 @@ Router::get('', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('rank', 'DefaultController');
 Router::get('notFound','DefaultController');
+Router::get('registration', 'DefaultController');
 Router::run($path);
