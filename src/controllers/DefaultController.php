@@ -6,7 +6,7 @@ class DefaultController extends AppController {
 
     public function index()
     {
-        $this->render('rank');
+        $this->render('login');
     }
     public function login()
     {

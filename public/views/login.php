@@ -30,7 +30,7 @@
     <div class="content-container down">
         <div class="login-container">
             <h1>Logowanie</h1>
-            <form>
+            <form action="login" method="POST">
                 <div class="form-item">
                     <label>Email</label>
                     <div class="form-input-window">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <button>Zaloguj się</button>
+                <button type="submit">Zaloguj się</button>
             </form>
             <div class="registration-text">
                 <p>Nie masz jeszcze konta? </p>
