@@ -4,6 +4,9 @@ class User
 {
     private $email;
     private $password;
+    private $name;
+    private $roleId;
+    private $avatar;
 
     public function __construct($email, $password, $name)
     {
@@ -64,9 +67,7 @@ class User
     {
         $this->avatar = $avatar;
     }
-    private $name;
-    private $roleId;
-    private $avatar;
+
 
 
 

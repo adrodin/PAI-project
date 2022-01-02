@@ -30,12 +30,12 @@
     <div class="content-container down">
         <div class="login-container">
             <h1>Rejestracja</h1>
-            <form>
+            <form method="post" action="registration">
 
                 <div class="form-item">
-                    <label>Login</label>
+                    <label>Imie</label>
                     <div class="form-input-window">
-                        <input name="login" type="text" placeholder="NoName">
+                        <input name="name" type="text" placeholder="NoName">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 <div class="form-item">
                     <label>Powtórz hasło</label>
                     <div class="form-input-window">
-                        <input name="password" type="password" placeholder="password">
+                        <input name="confirmedPassword" type="password" placeholder="password">
 
                         <div class="icons">
                             <i class="fas fa-eye"></i>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <button>Zarejestruj się</button>
+                <button type="submit">Zarejestruj się</button>
             </form>
             <div class="registration-text">
                 <p>Masz już konto? </p>
