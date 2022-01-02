@@ -37,8 +37,7 @@ class SecurityController extends AppController{
             // return $this->render('login', ['message'=>['wrong email']]);
             die('wrong email');
         }
-
-        if($user->getPassword() !== $password){
+        if(!password_verify($password,$user->getPassword())){
            // return $this->render('login', ['message'=>['wrong password']]);
             die('wrong pswd');
         }
@@ -64,13 +63,15 @@ class SecurityController extends AppController{
             //TODO
             die("Pasword != confPassword");
         }
-        $password = hash('sha256',$password);
+        //$password = hash('sha256',$password);
+        $password = password_hash($password,PASSWORD_ARGON2ID);
         $user = new User($email,$password,$name);
         $user->setAvatar('av');
         $this->userRepository->addUser($user);
 
         //TODO succesfully registrated info
-        return $this->render('login');
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 
 
