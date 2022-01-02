@@ -16,9 +16,6 @@ class SecurityController extends AppController{
 
         //$user = new User('admin@email.com', 'admin', 'admin');
 
-
-
-
         if(!$this->isPost()){
             return $this->render('login');
         }
@@ -53,11 +50,16 @@ class SecurityController extends AppController{
             return $this->render('registration');
         }
 
+
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmedPassword = $_POST['confirmedPassword'];
         $name = $_POST['name'];
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            //TODO invalid email
+            die("Invalid email");
+        }
 
         if ($password !== $confirmedPassword){
             //TODO
