@@ -2,6 +2,7 @@
 
 class User
 {
+    private $id;
     private $email;
     private $password;
     private $name;
@@ -14,6 +15,7 @@ class User
         $this->password = $password;
         $this->name = $name;
     }
+
 
     public function getEmail()
     {
@@ -66,6 +68,17 @@ class User
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
 

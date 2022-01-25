@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/rank.css">
 </head>
 <body>
+    <?php session_start() ;?>
     <?php include("navigation.php") ;?>
 
     <div class="tmp">

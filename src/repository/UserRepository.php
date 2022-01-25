@@ -18,11 +18,11 @@ class UserRepository extends Repository{
             //TODO user not found.....
             return null;
         }
-        return new User(
-            $user['email'],
-            $user['password'],
-            $user['name']
-        );
+        $newUser = new User($user['email'], $user['password'], $user['name']);
+        $newUser->setAvatar($user['avatar']);
+        $newUser->setId($user["id"]);
+        $newUser->setRoleId($user["id_role"]);
+        return $newUser;
     }
 
     public function addUser($user){

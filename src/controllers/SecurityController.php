@@ -13,7 +13,7 @@ class SecurityController extends AppController{
     }
 
     public function login(){
-
+        session_start();
         //$user = new User('admin@email.com', 'admin', 'admin');
 
         if(!$this->isPost()){
@@ -38,6 +38,8 @@ class SecurityController extends AppController{
            // return $this->render('login', ['message'=>['wrong password']]);
             die('wrong pswd');
         }
+
+        $_SESSION["user"] = serialize($user);
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/rank");
@@ -74,6 +76,13 @@ class SecurityController extends AppController{
         //TODO succesfully registrated info
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/login");
+    }
+
+    public function logout(){
+        session_start();
+        session_unset();
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/rank");
     }
 
 

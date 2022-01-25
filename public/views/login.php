@@ -7,6 +7,10 @@
 </head>
 
 <body>
+    <?php session_start()?>
+    <?php if($_SESSION["user"]) {?>
+    <?php $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/rank");}?>
     <div class="content-container up">
         <object class="logo" type="image/svg+xml" data="public/img/logov2.svg">
             Your browser does not support SVG.
