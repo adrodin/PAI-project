@@ -21,6 +21,13 @@
     <div class="content-container down">
         <div class="login-container">
             <h1>Logowanie</h1>
+            <?php
+            if(isset($message)){
+                foreach($message as $messag) {
+                    echo $messag;
+                }
+            }
+            ?>
             <form action="login" method="POST">
                 <div class="form-item">
                     <label>Email</label>

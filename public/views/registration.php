@@ -18,6 +18,13 @@
     <div class="content-container down">
         <div class="login-container">
             <h1>Rejestracja</h1>
+            <?php
+            if(isset($message)){
+                foreach($message as $messag) {
+                    echo $messag;
+                }
+            }
+            ?>
             <form method="post" action="registration">
 
                 <div class="form-item">

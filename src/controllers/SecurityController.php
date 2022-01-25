@@ -26,17 +26,17 @@ class SecurityController extends AppController{
         $user = $this->userRepository->getUser($email);
 
         if(!$user){
-            // return $this->render('login', ['message'=>['wrong email']]);
-            die('no email in db');
+            return $this->render('login', ['message'=>['Użytkownik nie istnieje']]);
+            //die('no email in db');
         }
 
         if ($user->getEmail() !== $email){
-            // return $this->render('login', ['message'=>['wrong email']]);
-            die('wrong email');
+             return $this->render('login', ['message'=>['Użytkownik nie istnieje']]);
+            //die('wrong email');
         }
         if(!password_verify($password,$user->getPassword())){
-           // return $this->render('login', ['message'=>['wrong password']]);
-            die('wrong pswd');
+            return $this->render('login', ['message'=>['Użytkownik nie istnieje']]);
+           // die('wrong pswd');
         }
 
         $_SESSION["user"] = serialize($user);
@@ -60,12 +60,14 @@ class SecurityController extends AppController{
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             //TODO invalid email
-            die("Invalid email");
+            return $this->render('registration', ['message'=>['Zły email']]);
+            //die("Invalid email");
         }
 
         if ($password !== $confirmedPassword){
             //TODO
-            die("Pasword != confPassword");
+            return $this->render('registration', ['message'=>['Podane hasła są różne']]);
+            //die("Pasword != confPassword");
         }
         //$password = hash('sha256',$password);
         $password = password_hash($password,PASSWORD_ARGON2ID);
@@ -73,9 +75,10 @@ class SecurityController extends AppController{
         $user->setAvatar('av');
         $this->userRepository->addUser($user);
 
+        return $this->render('login', ['message'=>['Pomyślna rejestracja']]);
         //TODO succesfully registrated info
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/login");
+        //$url = "http://$_SERVER[HTTP_HOST]";
+        //header("Location: {$url}/login");
     }
 
     public function logout(){
