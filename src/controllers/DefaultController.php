@@ -28,4 +28,14 @@ class DefaultController extends AppController {
         $this->render('user_ratings');
     }
 
+    public function settings(){
+        if(isset($_COOKIE['userId'])){
+            return $this->render('settings');
+        }
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/rank");
+    }
+
+
+
 }

@@ -24,12 +24,12 @@
     </div>
             <?php } ?>
     <div class="nav-item user-info">
-        <img class='nav-avatar' src="https://i.wpimg.pl/730x0/m.fotoblogia.pl/jajko-688cda13e203b23850b3998237.jpg">
+        <img class='nav-avatar' src="public/uploads/avatars/<?= $user->getAvatar()?>">
          <?php echo($user->getName())?>
     </div>
     <div class="nav-item">
         <i class="fas fa-cog"></i>
-        <a href="#" class="nav-button">Ustawienia</a>
+        <a href="settings" class="nav-button">Ustawienia</a>
     </div>
     <div class="nav-item">
         <i class="fas fa-sign-out-alt"></i>

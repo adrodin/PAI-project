@@ -1,0 +1,34 @@
+h1{
+    text-align: center;
+}
+
+form{
+    margin: 2%;
+
+}
+label {
+    margin-bottom: 1%;
+}
+input{
+    width: 10%;
+}
+.input-avatar{
+    width: 20%;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item{
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-button{
+    width: 20%;
+    padding: 1%;
+}
+

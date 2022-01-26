@@ -5,7 +5,16 @@ require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository{
 
-    public function getUser($email){
+    private function createUser($userData){
+        $user = new User($userData['email'], $userData['password'], $userData['name']);
+        $user->setAvatar($userData['avatar']);
+        $user->setId($userData["id"]);
+        $user->setRoleId($userData["id_role"]);
+        return $user;
+
+    }
+
+    public function getUserByEmail($email){
     //
         $stmt = $this->database->connect()->prepare("
             SELECT * FROM users where email = :email
@@ -18,11 +27,39 @@ class UserRepository extends Repository{
             //TODO user not found.....
             return null;
         }
-        $newUser = new User($user['email'], $user['password'], $user['name']);
-        $newUser->setAvatar($user['avatar']);
-        $newUser->setId($user["id"]);
-        $newUser->setRoleId($user["id_role"]);
-        return $newUser;
+        return self::createUser($user);
+    }
+
+    public function getUserByName($name){
+        //
+        $stmt = $this->database->connect()->prepare("
+            SELECT * FROM users where name = :name
+        ");
+        $stmt->bindParam(':name',$name,PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($user == false){
+            //TODO user not found.....
+            return null;
+        }
+        return self::createUser($user);
+    }
+
+    public function getUserById($id){
+        //
+        $stmt = $this->database->connect()->prepare("
+            SELECT * FROM users where id = :id
+        ");
+        $stmt->bindParam(':id',$id,PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($user == false){
+            //TODO user not found.....
+            return null;
+        }
+        return self::createUser($user);
     }
 
     public function addUser($user){
@@ -36,8 +73,7 @@ class UserRepository extends Repository{
 
         $userTest = $stmt->fetch(PDO::FETCH_ASSOC);
         if($userTest == true){
-            //TODO user exist
-            return null;
+            return false;
         }
 
 
@@ -52,7 +88,29 @@ class UserRepository extends Repository{
             $user->getPassword(),
             $user->getAvatar(),
         ]);
+        return true;
 
     }
+
+    public function changeAvatar($avatar,$userId){
+        $stmt = $this->database->connect()->prepare("
+            UPDATE users SET avatar = :avatar WHERE id = :id
+        ");
+        $stmt->bindParam(':avatar',$avatar,PDO::PARAM_STR);
+        $stmt->bindParam(':id',$userId,PDO::PARAM_STR);
+        $stmt->execute();
+
+    }
+
+    public function changePassword($password,$userId){
+        $stmt = $this->database->connect()->prepare("
+            UPDATE users SET password = :password WHERE id = :id
+        ");
+        $stmt->bindParam(':password',$password,PDO::PARAM_STR);
+        $stmt->bindParam(':id',$userId,PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+
 
 }

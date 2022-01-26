@@ -12,4 +12,7 @@ Router::post('registration', 'SecurityController');
 Router::get('rank', 'DefaultController');
 Router::get('notFound','DefaultController');
 Router::get('user_ratings','DefaultController');
+Router::get('settings','DefaultController');
+Router::post('changePassword', 'SecurityController');
+Router::post('changeAvatar', 'SecurityController');
 Router::run($path);
