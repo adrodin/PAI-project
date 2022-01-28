@@ -20,7 +20,7 @@
         <?php if($user->getRoleId() > 1) {?>
     <div class="nav-item">
         <i class="fas fa-plus"></i>
-        <a href="#" class="nav-button">Dodaj yerbe</a>
+        <a href="newYerba" class="nav-button">Dodaj yerbe</a>
     </div>
             <?php } ?>
     <div class="nav-item user-info">

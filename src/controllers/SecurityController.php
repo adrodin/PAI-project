@@ -41,7 +41,6 @@ class SecurityController extends AppController{
         }
 
         $_SESSION["user"] = serialize($user);
-        setcookie("userId", $user->getId(), time()+90000);
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/rank");
@@ -68,7 +67,7 @@ class SecurityController extends AppController{
         }
         $password = password_hash($password,PASSWORD_ARGON2ID);
         $user = new User($email,$password,$name);
-        $user->setAvatar('default.png');
+        $user->setAvatar('default.jpg');
         if($this->userRepository->addUser($user)){
             return $this->render('login', ['message'=>['Pomyślna rejestracja']]);
         }
@@ -81,7 +80,6 @@ class SecurityController extends AppController{
     public function logout(){
         session_start();
         session_unset();
-        setcookie("userId", 1, time()-60);
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/rank");
     }
@@ -100,11 +98,12 @@ class SecurityController extends AppController{
     }
 
     public function changePassword(){
-        if(!isset($_COOKIE['userId'])){
+        session_start();
+        if(!isset($_SESSION['user'])){
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/rank");
         }
-
+        $user = unserialize($_SESSION['user']);
         if(!$this->isPost()){
             return $this->render('settings');
         }
@@ -116,19 +115,20 @@ class SecurityController extends AppController{
             return $this->render('settings', ['message' => ["Nowe hasła są różne"]]);
         }
 
-        $userPassword = $this->userRepository->getUserById($_COOKIE['userId'])->getPassword();
+        $userPassword = $this->userRepository->getUserById($user->getId())->getPassword();
         if(!password_verify($oldPassword,$userPassword)){
             return $this->render('settings', ['message' => ["Błędne hasło"]]);
         }
 
         $password = password_hash($newPassword,PASSWORD_ARGON2ID);
-        $this->userRepository->changePassword($password,$_COOKIE['userId']);
+        $this->userRepository->changePassword($password,$user->getId());
         return $this->render('settings', ['message' => ["Hasło zostało pomyślnie zmienione"]]);
     }
 
     public function changeAvatar(){
+        session_start();
         $url = "http://$_SERVER[HTTP_HOST]";
-        if(!isset($_COOKIE['userId'])){
+        if(!isset($_SESSION['user'])){
             header("Location: {$url}/rank");
         }
         if (!$this->isPost()){
@@ -139,7 +139,7 @@ class SecurityController extends AppController{
             move_uploaded_file($_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
-            $this->userRepository->changeAvatar($_FILES['file']['name'],$_COOKIE['userId']);
+            $this->userRepository->changeAvatar($_FILES['file']['name'],unserialize($_SESSION['user'])->getId());
             $this->message[] = "Pomyślnie zmieniono avatar";
         }
         return $this->render('settings', ['message' => [$this->message[0]]]);

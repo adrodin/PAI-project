@@ -45,10 +45,10 @@
 
             <form action="changeAvatar" method="POST" enctype="multipart/form-data">
                 <div class="form-item">
-                <input class="input-avatar " type="file" name="file">
+                    <input class="input-avatar " type="file" name="file">
                 </div>
                 <div class="form-item">
-                <button class="settings-button" type="submit">Zmień avatar</button>
+                    <button class="settings-button" type="submit">Zmień avatar</button>
                 </div>
             </form>
         </div>
