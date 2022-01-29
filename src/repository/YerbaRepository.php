@@ -2,6 +2,7 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Yerba.php';
+require_once __DIR__.'/../models/AverageRating.php';
 require_once __DIR__.'/../models/Type.php';
 require_once __DIR__.'/../models/Origin.php';
 
@@ -28,7 +29,9 @@ class YerbaRepository extends Repository{
         $stmt->execute();
         $id = $stmt->fetch()['id'];
         $this->initRating($id);
-        $this->addAddons($id, $addons);
+        if(!empty($addons[0])){
+            $this->addAddons($id, $addons);
+        }
     }
 
     private function initRating($id){
@@ -60,7 +63,7 @@ class YerbaRepository extends Repository{
 
             $stmt = $this->database->connect()->prepare("
                     INSERT INTO addons_yerba
-                        SELECT id,:yerbaId from addons where name = :name
+                        SELECT :yerbaId,id from addons where name = :name
                     ");
             $stmt->bindParam(':name', $addon);
             $stmt->bindParam(':yerbaId', $yerbaId);
@@ -115,6 +118,58 @@ class YerbaRepository extends Repository{
 
         }
         return $toReturn;
+    }
+
+    public function getOriginsWithId(){
+        $stmt = $this->database->connect()->prepare("
+            SELECT * FROM origin
+        ");
+        $stmt->execute();
+        $toReturn = [];
+        $origins = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($origins as $origin){
+            $originToPush = new Origin($origin['country'],$origin['flag']);
+            $originToPush->setId($origin['id']);
+            $toReturn[$origin['id']] = $originToPush;
+
+        }
+        return $toReturn;
+    }
+
+    public function getAllWithAverageRatings(){
+        $stmt = $this->database->connect()->prepare("
+             SELECT * from yerba
+             join average_rating ar on yerba.id = ar.id_yerba    ;
+        ");
+        $stmt->execute();
+        $dataToReturn = [];
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($data as $yerba){
+            $newYerba = new Yerba($yerba['id_origin'],$yerba['id_type'],$yerba['name'],$yerba['description'],$yerba['image']);
+            $newYerba->setId($yerba['yerba.id']);
+            $newAverageRating = new AverageRating($yerba['id_yerba'],$yerba['num_of_ratings'],
+                $yerba['general'],$yerba['dust'],$yerba['green'],$yerba['smoke'],
+                $yerba['intensity'],$yerba['strength'],$yerba['addons']);
+            $dataToReturn[$yerba['id_yerba']] = ['y' => $newYerba, 'r'=>$newAverageRating];
+        }
+        return $dataToReturn;
+    }
+
+    public function getYerbaByID($id){
+        $stmt = $this->database->connect()->prepare("
+             SELECT * from yerba
+             join average_rating ar on yerba.id = ar.id_yerba  
+             WHERE yerba.id = :id;
+        ");
+        $stmt->bindParam('id',$id);
+        $stmt->execute();
+        $yerba = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $newYerba = new Yerba($yerba['id_origin'],$yerba['id_type'],$yerba['name'],$yerba['description'],$yerba['image']);
+        $newYerba->setId($yerba['yerba.id']);
+        $newAverageRating = new AverageRating($yerba['id_yerba'],$yerba['num_of_ratings'],
+            $yerba['general'],$yerba['dust'],$yerba['green'],$yerba['smoke'],
+            $yerba['intensity'],$yerba['strength'],$yerba['addons']);
+        return ['y' => $newYerba, 'r'=>$newAverageRating];
     }
 
 }

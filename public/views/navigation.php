@@ -7,7 +7,7 @@
     </object>
     <div class="nav-item">
         <i class="fas fa-medal"></i>
-        <a href="#" class="nav-button">Ranking</a>
+        <a href="rank" class="nav-button">Ranking</a>
     </div>
     <div class="nav-item">
         Szukaj
