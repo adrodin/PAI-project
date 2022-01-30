@@ -156,20 +156,22 @@ class YerbaRepository extends Repository{
     }
 
     public function getYerbaByID($id){
+
         $stmt = $this->database->connect()->prepare("
              SELECT * from yerba
              join average_rating ar on yerba.id = ar.id_yerba  
              WHERE yerba.id = :id;
         ");
-        $stmt->bindParam('id',$id);
+        $stmt->bindParam(':id',$id);
         $stmt->execute();
-        $yerba = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $yerba = $stmt->fetch(PDO::FETCH_ASSOC);
         $newYerba = new Yerba($yerba['id_origin'],$yerba['id_type'],$yerba['name'],$yerba['description'],$yerba['image']);
-        $newYerba->setId($yerba['yerba.id']);
+        $newYerba->setId($id);
         $newAverageRating = new AverageRating($yerba['id_yerba'],$yerba['num_of_ratings'],
             $yerba['general'],$yerba['dust'],$yerba['green'],$yerba['smoke'],
             $yerba['intensity'],$yerba['strength'],$yerba['addons']);
         return ['y' => $newYerba, 'r'=>$newAverageRating];
     }
+
 
 }

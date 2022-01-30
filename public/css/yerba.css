@@ -1,0 +1,47 @@
+.comments{
+    display: flex;
+    flex-direction: column;
+}
+.comment{
+    padding: 2%;
+    margin: 1% 2%;
+    background: var(--my-green);
+    border-color: var(--darker-green);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 2px;
+}
+.comment > div {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.comment-owner{
+    flex-direction: row;
+}
+.comment-owner > img{
+    width: 2vw;
+    height: 2vw;
+    border-radius: 100%;
+}
+
+.ratings-from{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.one-rating{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+}
+.radio-item{
+    width: 10%;
+}
+.add-comment-button{
+    width: 30%;
+    padding: 1%;
+}

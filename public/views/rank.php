@@ -16,14 +16,14 @@
             <p>Filtruj</p>
             <p>Sortuj</p>
         </div>
-
         <?php foreach ($yerba as $yerbaId => $data): ?>
 
 
         <div class="content-item">
             <div class="item-top">
-                <a href="#" class="yerba-name"><?php echo($data['y']->getName()) ?></a>
+                <a href="yerba?id=<?php echo($yerbaId) ?>" class="yerba-name"><?php echo($data['y']->getName()) ?></a>
             </div>
+
             <div class="item-body">
                 <div class="photo-ratings">
                     <img src="public/uploads/yerba/<?= $data['y']->getImage()?>">
@@ -32,6 +32,7 @@
                         <div class="rating-top">
                             <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getGeneral()/$data['r']->getNumOfRatings()) ?>/5</p>
                         </div>
+
                         <img class="flag" src="public/uploads/flags/<?= $origins[$data['y']->getOrigin()]->getFlag()?>">
                         <div class="rating-item">
                             <p>Pył</p>

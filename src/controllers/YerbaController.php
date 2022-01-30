@@ -4,6 +4,7 @@ require_once __DIR__.'/../models/Yerba.php';
 require_once __DIR__.'/../models/Origin.php';
 require_once __DIR__.'/../models/Yerba.php';
 require_once __DIR__.'/../repository/YerbaRepository.php';
+require_once __DIR__.'/../repository/CommentsRepository.php';
 
 class YerbaController extends AppController{
 
@@ -12,10 +13,12 @@ class YerbaController extends AppController{
     const UPLOAD_DIRECTORY = '/../public/uploads/yerba/';
 
     private $yerbaRepository;
+    private $commentsRepository;
     private $message;
     public function __construct(){
         parent::__construct();
         $this->yerbaRepository = new YerbaRepository();
+        $this->commentsRepository = new CommentsRepository();
     }
 
     private function validateFile($file){
@@ -90,5 +93,16 @@ class YerbaController extends AppController{
         }
         return $this->render('newYerba',['message'=>[$this->message[0]], 'origins'=>$origins, 'types'=>$types]);
     }
+
+
+    public function yerba()
+    {
+        $id = $_GET['id'];
+        $yerba = $this->yerbaRepository->getYerbaByID($id);
+        $origins = $this->yerbaRepository->getOriginsWithId();
+        $comments = $this->commentsRepository->getCommentsWithRatesByYerbaId($id);
+        return $this->render('yerba', ['yerba'=>$yerba, 'comments'=>$comments, 'origins'=>$origins]);
+    }
+
 
 }

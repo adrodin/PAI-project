@@ -29,7 +29,8 @@ class DefaultController extends AppController {
     }
 
     public function settings(){
-        if(isset($_COOKIE['userId'])){
+        session_start();
+        if(isset($_SESSION['user'])){
             return $this->render('settings');
         }
         $url = "http://$_SERVER[HTTP_HOST]";

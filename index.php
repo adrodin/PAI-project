@@ -16,4 +16,6 @@ Router::get('settings','DefaultController');
 Router::post('changePassword', 'SecurityController');
 Router::post('changeAvatar', 'SecurityController');
 Router::get('newYerba', 'YerbaController');
+Router::get('yerba', 'YerbaController');
+Router::post('addOpinion', 'CommentsController');
 Router::run($path);
