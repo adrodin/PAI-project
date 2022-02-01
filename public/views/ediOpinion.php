@@ -16,6 +16,9 @@
     <div>
         <div class="item-top">
             <a href="#" class="yerba-name"><?php echo($yerba['y']->getName()) ?></a>
+            <div class="add">
+                <a href="deleteOpinion?id=<? echo($opinion['c']->getId())?>" class="add-button">Usuń opinie</a>
+            </div>
         </div>
         <div class="item-body">
             <div class="photo-ratings">
@@ -87,14 +90,16 @@
 
 
 
-                        <button class="add-comment-button" type="submit" >Edytuj komentarz</button>
+                        <button class="add-comment-button" type="submit" >Edytuj opinie</button>
                     </form>
 
                 </div>
 
             </div>
         </div>
+
     </div>
+
 </div>
 </body>
 </html>

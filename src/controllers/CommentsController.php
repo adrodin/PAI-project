@@ -145,8 +145,29 @@ class CommentsController extends AppController
     }
 
     public function deleteOpinion(){
+        session_start();
+        $url = "http://$_SERVER[HTTP_HOST]";
 
-        //TODO
+        if(!isset($_GET['id'])){
+            header("Location: {$url}/rank");
+            die();
+        }
+
+        if(!isset($_SESSION['user'])){
+            header("Location: {$url}/rank");
+            die();
+        }
+        $id = $_GET['id'];
+        $idUser = unserialize($_SESSION['user'])->getId();
+
+        $opinion = $this->commentsRepository->getById($id);
+        if($opinion['c']->getIdUser() != $idUser){
+            header("Location: {$url}/rank");
+            die();
+        }
+        $this->commentsRepository->deleteComment($opinion);
+        header("Location: {$url}/userRatings");
+
     }
 
 }

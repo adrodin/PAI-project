@@ -196,4 +196,41 @@ class CommentsRepository extends Repository{
        // $this->database->connect()->commit();
     }
 
+    public function deleteComment($opinion){
+        $stmt = $this->database->connect()->prepare("
+            UPDATE average_rating
+            SET general = general - :general,
+                dust = dust - :dust,
+                green = green - :green,
+                smoke = smoke - :smoke,
+                intensity = intensity - :intensity,
+                strength = strength - :strength,
+                addons = addons - :addons,
+                num_of_ratings = num_of_ratings - 1
+            WHERE id_yerba = :idYerba
+        ");
+        $stmt->bindParam(':general', $opinion['r']->getGeneral());
+        $stmt->bindParam(':dust', $opinion['r']->getDust());
+        $stmt->bindParam(':green', $opinion['r']->getGreen());
+        $stmt->bindParam(':smoke', $opinion['r']->getSmoke());
+        $stmt->bindParam(':intensity', $opinion['r']->getIntensity());
+        $stmt->bindParam(':strength', $opinion['r']->getStrength());
+        $stmt->bindParam(':addons', $opinion['r']->getAddons());
+        $stmt->bindParam(':idYerba', $opinion['c']->getIdYerba());
+        $stmt->execute();
+
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM rating
+            WHERE id = :id
+        ");
+        $stmt->bindParam(':id', $opinion['r']->getId());
+        $stmt->execute();
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM comment
+            WHERE id = :id
+        ");
+        $stmt->bindParam(':id', $opinion['c']->getId());
+        $stmt->execute();
+    }
+
 }
