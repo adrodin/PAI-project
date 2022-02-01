@@ -5,6 +5,7 @@ require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/YerbaController.php';
 require_once 'src/controllers/RankController.php';
 require_once 'src/controllers/CommentsController.php';
+require_once 'src/controllers/UserController.php';
 
 
 

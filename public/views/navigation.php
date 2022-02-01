@@ -15,7 +15,7 @@
     <?php if($user) { ?>
     <div class="nav-item">
         <i class="fas fa-medal"></i>
-        <a href="#" class="nav-button">Twoje oceny</a>
+        <a href="userRatings" class="nav-button">Twoje oceny</a>
     </div>
         <?php if($user->getRoleId() > 1) {?>
     <div class="nav-item">

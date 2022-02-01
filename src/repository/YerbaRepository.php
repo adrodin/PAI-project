@@ -174,4 +174,21 @@ class YerbaRepository extends Repository{
     }
 
 
+    public function getAll(){
+        $stmt = $this->database->connect()->prepare("
+             SELECT * from yerba;
+        ");
+        $stmt->execute();
+        $dataToReturn = [];
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($data as $yerba){
+
+            $newYerba = new Yerba($yerba['id_origin'],$yerba['id_type'],$yerba['name'],$yerba['description'],$yerba['image']);
+            $newYerba->setId($yerba['id']);
+            $dataToReturn[$yerba['id']] = $newYerba;
+        }
+
+        return $dataToReturn;
+    }
+
 }

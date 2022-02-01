@@ -70,7 +70,8 @@ class CommentsRepository extends Repository{
                 smoke = smoke + :smoke,
                 intensity = intensity + :intensity,
                 strength = strength + :strength,
-                addons = addons + :addons
+                addons = addons + :addons,
+                num_of_ratings = num_of_ratings + 1
             WHERE id_yerba = :idYerba
         ");
         $stmt->bindParam(':general', $general);
@@ -84,6 +85,31 @@ class CommentsRepository extends Repository{
 
         $stmt->execute();
 
+    }
+
+    public function getCommentsByUserId($userId){
+        $stmt = $this->database->connect()->prepare("
+            SELECT * from comment
+            join rating r on comment.id = r.id_comment
+            WHERE id_user = :idUser
+        ");
+
+        $stmt->bindParam(':idUser',$userId);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll();
+        $toReturn = [];
+        $xd = 0;
+        foreach ($data as $line){
+            $newComment = new Comment($line['id_user'],$line['id_yerba'],$line['content']);
+            $newComment->setId($line['id_comment']);
+            $newRating = new Rating($line['id_comment'],$line['general'],$line['dust'],$line['green'],$line['smoke'],
+                                    $line['intensity'],$line['strength'],$line['addons']);
+            $newRating->setId($line['r.id']);
+            $toReturn[$line['id_comment']] = ['c' => $newComment, 'r' => $newRating];
+
+        }
+        return $toReturn;
     }
 
 }

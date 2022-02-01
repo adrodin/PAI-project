@@ -11,7 +11,7 @@ Router::get('logout', 'SecurityController');
 Router::post('registration', 'SecurityController');
 Router::get('rank', 'RankController');
 Router::get('notFound','DefaultController');
-Router::get('user_ratings','DefaultController');
+Router::get('userRatings','UserController');
 Router::get('settings','DefaultController');
 Router::post('changePassword', 'SecurityController');
 Router::post('changeAvatar', 'SecurityController');
