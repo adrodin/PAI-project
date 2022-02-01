@@ -18,6 +18,9 @@
             <div class="item-top">
 
                 <a href="yerba?id=<?php echo($comment['c']->getIdYerba()) ?>" class="yerba-name"><?php echo($yerba[$comment['c']->getIdYerba()]->getName()) ?></a>
+                <div class="add">
+                <a href="editOpinion?id=<? echo($comment['c']->getId())?>" class="add-button">Edytuj opinie</a>
+                </div>
             </div>
 
             <div class="item-body">

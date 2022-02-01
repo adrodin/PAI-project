@@ -18,4 +18,5 @@ Router::post('changeAvatar', 'SecurityController');
 Router::get('newYerba', 'YerbaController');
 Router::get('yerba', 'YerbaController');
 Router::post('addOpinion', 'CommentsController');
+Router::post('editOpinion', 'CommentsController');
 Router::run($path);

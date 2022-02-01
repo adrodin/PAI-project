@@ -18,17 +18,10 @@
             <div class="item-top">
                 <a href="#" class="yerba-name"><?php echo($yerba['y']->getName()) ?></a>
                 <div class="add">
-                    <?php
-                        if(array_key_exists($userId,$comments)){
-                            $buttonClass = "edit-button";
-                            $buttonLabel = "Edytuj opinie";
-                        }else{
-                            $buttonClass = "add-button";
-                            $buttonLabel = "Dodaj opinie";
-                        }
-                    ?>
+                    <?php if(!array_key_exists($userId,$comments)):?>{
                     <i class="fas fa-plus"></i>
-                    <a href="addOpinion?id=<? echo($yerba['y']->getId())?>" class=<?php echo($buttonClass) ?>><?php echo($buttonLabel) ?></a>
+                    <a href="addOpinion?id=<? echo($yerba['y']->getId())?>" class="add-button">Dodaj opinie</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="item-body">

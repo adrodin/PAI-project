@@ -138,8 +138,9 @@ class YerbaRepository extends Repository{
 
     public function getAllWithAverageRatings(){
         $stmt = $this->database->connect()->prepare("
-             SELECT * from yerba
-             join average_rating ar on yerba.id = ar.id_yerba    ;
+            SELECT * from yerba
+            join average_rating ar on yerba.id = ar.id_yerba  
+            ORDER BY ar.general;
         ");
         $stmt->execute();
         $dataToReturn = [];

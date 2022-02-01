@@ -112,4 +112,88 @@ class CommentsRepository extends Repository{
         return $toReturn;
     }
 
+    public function getById($id){
+        $stmt = $this->database->connect()->prepare("
+            SELECT * from comment
+            join rating r on comment.id = r.id_comment
+            WHERE comment.id = :id
+        ");
+
+        $stmt->bindParam(':id',$id);
+        $stmt->execute();
+        $data = $stmt->fetch();
+        $newComment = new Comment($data['id_user'],$data['id_yerba'],$data['content']);
+        $newComment->setId($data['id_comment']);
+        $newRating = new Rating($data['id_comment'],$data['general'],$data['dust'],$data['green'],$data['smoke'],
+            $data['intensity'],$data['strength'],$data['addons']);
+        $newRating->setId($data['id']);
+
+        return ['c'=>$newComment,'r'=>$newRating];
+    }
+
+    public function editComment($oldOpinion,$general ,$dust,$green,$smoke, $intensity, $strength, $addons, $text){
+       // $this->database->connect()->beginTransaction();
+        //ocena średnia
+        $stmt = $this->database->connect()->prepare("
+            UPDATE average_rating
+            SET general = general + :general - :oldGeneral,
+                dust = dust + :dust - :oldDust,
+                green = green + :green - :oldGreen,
+                smoke = smoke + :smoke - :oldSmoke,
+                intensity = intensity + :intensity - :oldIntensity,
+                strength = strength + :strength - :oldStrength,
+                addons = addons + :addons - :oldAddons
+            WHERE id_yerba = :idYerba
+        ");
+        $stmt->bindParam(':general', $general);
+        $stmt->bindParam(':dust', $dust);
+        $stmt->bindParam(':green', $green);
+        $stmt->bindParam(':smoke', $smoke);
+        $stmt->bindParam(':intensity', $intensity);
+        $stmt->bindParam(':strength', $strength);
+        $stmt->bindParam(':addons', $addons);
+        $stmt->bindParam(':oldGeneral', $oldOpinion['r']->getGeneral());
+        $stmt->bindParam(':oldDust', $oldOpinion['r']->getDust());
+        $stmt->bindParam(':oldGreen', $oldOpinion['r']->getGreen());
+        $stmt->bindParam(':oldSmoke', $oldOpinion['r']->getSmoke());
+        $stmt->bindParam(':oldIntensity', $oldOpinion['r']->getIntensity());
+        $stmt->bindParam(':oldStrength', $oldOpinion['r']->getStrength());
+        $stmt->bindParam(':oldAddons', $oldOpinion['r']->getAddons());
+        $stmt->bindParam(':idYerba', $oldOpinion['c']->getIdYerba());
+        // 🙃
+        $stmt->execute();
+
+
+        $stmt = $this->database->connect()->prepare("
+            UPDATE rating
+            SET general = :general,
+                dust = :dust,
+                green = :green,
+                smoke = :smoke,
+                intensity = :intensity,
+                strength = :strength,
+                addons = :addons
+            WHERE id = :id
+        ");
+        $stmt->bindParam(':general', $general);
+        $stmt->bindParam(':dust', $dust);
+        $stmt->bindParam(':green', $green);
+        $stmt->bindParam(':smoke', $smoke);
+        $stmt->bindParam(':intensity', $intensity);
+        $stmt->bindParam(':strength', $strength);
+        $stmt->bindParam(':addons', $addons);
+        $stmt->bindParam(':id', $oldOpinion['r']->getId());
+        $stmt->execute();
+
+        $stmt = $this->database->connect()->prepare("
+            UPDATE comment
+            SET content = :content
+            WHERE id = :id
+        ");
+        $stmt->bindParam(':content', $text);
+        $stmt->bindParam(':id', $oldOpinion['c']->getId());
+        $stmt->execute();
+       // $this->database->connect()->commit();
+    }
+
 }

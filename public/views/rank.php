@@ -30,45 +30,45 @@
 
                     <div class="rating">
                         <div class="rating-top">
-                            <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getGeneral()/$data['r']->getNumOfRatings()) ?>/5</p>
+                            <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getGeneral()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                         </div>
 
                         <img class="flag" src="public/uploads/flags/<?= $origins[$data['y']->getOrigin()]->getFlag()?>">
                         <div class="rating-item">
                             <p>Pył</p>
                             <div class="stars">
-                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getDust()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getDust()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Zielone nuty</p>
                             <div class="stars">
 <!--                                <i class="fas fa-star"></i>-->
-                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getGreen()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getGreen()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Dymne nuty</p>
                             <div class="stars">
-                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getSmoke()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getSmoke()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Intensywność</p>
                             <div class="stars">
-                                 <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getIntensity()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                 <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getIntensity()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Pobudzenie</p>
                             <div class="stars">
-                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getStrength()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getStrength()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Dodatki</p>
                             <div class="stars">
-                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  $data['r']->getAddons()/$data['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($data['r']->getNumOfRatings() == 0) ? 0 :  round($data['r']->getAddons()/$data['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
 
