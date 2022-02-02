@@ -18,7 +18,7 @@
             <div class="item-top">
                 <a href="#" class="yerba-name"><?php echo($yerba['y']->getName()) ?></a>
                 <div class="add">
-                    <?php if(!array_key_exists($userId,$comments)):?>{
+                    <?php if(!array_key_exists($userId,$comments)):?>
                     <i class="fas fa-plus"></i>
                     <a href="addOpinion?id=<? echo($yerba['y']->getId())?>" class="add-button">Dodaj opinie</a>
                     <?php endif; ?>
@@ -84,8 +84,8 @@
                 <div class="comment-top">
                     <p>Ocena: <?php echo($commentData['r']->getGeneral())  ?></p>
                     <div class="comment-owner">
-                        <img src="public/uploads/avatars/<?php echo($commentData['avatar'])?>">
                         <p><?php echo($commentData['name'])  ?></p>
+
                     </div>
                 </div>
                 <div class="comment-ratings">

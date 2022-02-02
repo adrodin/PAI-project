@@ -140,7 +140,7 @@ class SecurityController extends AppController{
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
             $this->userRepository->changeAvatar($_FILES['file']['name'],unserialize($_SESSION['user'])->getId());
-            $this->message[] = "Pomyślnie zmieniono avatar";
+            $this->message[] = "Pomyślnie zmieniono avatar. Przeloguj się aby go zobaczyć";
         }
         return $this->render('settings', ['message' => [$this->message[0]]]);
     }
