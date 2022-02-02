@@ -47,4 +47,16 @@ input{
     flex-direction: column;
 }
 
+textarea{
+    background-color: var(--my-green);
+    border-radius: 30px;
+    border-color: var(--darkest-green);
+    border: 1px;
+    border-style: solid;
+    padding: 20px;
+    margin:10px
+}
+textarea:focus{
+    border-color: #32532D;
+}
 

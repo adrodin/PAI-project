@@ -10,7 +10,7 @@ input{
     border-right: 0px;
     background-color: var(--my-green);
 }
-input:focuse{
+input:focus{
     border-bottom: 1px solid var(--darkest-green);
     border-top: 0px;
     border-left: 0px;
