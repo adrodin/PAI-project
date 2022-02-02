@@ -4,7 +4,7 @@
 <head>
     <?php include("head.php") ;?>
     <link rel="stylesheet" type="text/css" href="public/css/login.css">
-
+    <script type="text/javascript" src="./public/js/script.js" defer></script>
 </head>
 
 <body>
@@ -40,8 +40,8 @@
                         <input name="email" type="text" placeholder="email@email.com">
 
                         <div class="icons">
-                            <i class="fas fa-check-circle"></i>
-                            <i class="fas fa-times-circle"></i>
+<!--                            <i class="fas fa-check-circle"></i>-->
+<!--                            <i class="fas fa-times-circle"></i>-->
                         </div>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                         <input name="password" type="password" placeholder="password">
 
                         <div class="icons">
-                            <i class="fas fa-eye"></i>
-                            <i class="fas fa-question"></i>
+<!--                            <i class="fas fa-eye"></i>-->
+<!--                            <i class="fas fa-question"></i>-->
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                         <input name="confirmedPassword" type="password" placeholder="password">
 
                         <div class="icons">
-                            <i class="fas fa-eye"></i>
-                            <i class="fas fa-question"></i>
+<!--                            <i class="fas fa-eye"></i>-->
+<!--                            <i class="fas fa-question"></i>-->
                         </div>
                     </div>
                 </div>
