@@ -12,17 +12,11 @@ class Rating extends Values
         $this->idComment = $idComment;
     }
 
-    /**
-     * @return mixed
-     */
     public function getIdComment()
     {
         return $this->idComment;
     }
 
-    /**
-     * @param mixed $idComment
-     */
     public function setIdComment($idComment)
     {
         $this->idComment = $idComment;

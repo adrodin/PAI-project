@@ -39,7 +39,6 @@ class YerbaRepository extends Repository{
             INSERT INTO average_rating (id_yerba) values (?)
         ");
         $stmt->execute([$id]);
-
     }
 
     private function addAddons($yerbaId, $addons){
@@ -51,7 +50,6 @@ class YerbaRepository extends Repository{
             ");
             $stmt->bindParam(':name',$addon,PDO::PARAM_STR);
             $stmt->execute();
-
             if($stmt->fetch(PDO::FETCH_ASSOC) != true){
                 //jak nie ma to insert
                 $stmt = $this->database->connect()->prepare("
@@ -60,7 +58,6 @@ class YerbaRepository extends Repository{
                    $addon
                 ]);
             }
-
             $stmt = $this->database->connect()->prepare("
                     INSERT INTO addons_yerba
                         SELECT :yerbaId,id from addons where name = :name
@@ -68,16 +65,10 @@ class YerbaRepository extends Repository{
             $stmt->bindParam(':name', $addon);
             $stmt->bindParam(':yerbaId', $yerbaId);
             $stmt->execute();
-
-
-
         }
-
-
     }
 
     public function getAddons($yerbaId){
-
         $stmt = $this->database->connect()->prepare("
                 SELECT a.id, a.name from yerba
                 full join addons_yerba ay on yerba.id = ay.id_yerba
@@ -157,7 +148,6 @@ class YerbaRepository extends Repository{
     }
 
     public function getYerbaByID($id){
-
         $stmt = $this->database->connect()->prepare("
              SELECT * from yerba
              join average_rating ar on yerba.id = ar.id_yerba  
@@ -183,12 +173,10 @@ class YerbaRepository extends Repository{
         $dataToReturn = [];
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($data as $yerba){
-
             $newYerba = new Yerba($yerba['id_origin'],$yerba['id_type'],$yerba['name'],$yerba['description'],$yerba['image']);
             $newYerba->setId($yerba['id']);
             $dataToReturn[$yerba['id']] = $newYerba;
         }
-
         return $dataToReturn;
     }
 

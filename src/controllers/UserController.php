@@ -26,7 +26,6 @@ class UserController extends AppController
             header("Location: {$url}/rank");
         }
         $userId = unserialize($_SESSION['user'])->getId();
-
         $userRatings = $this->commentsRepository->getCommentsByUserId($userId);
         $yerba = $this->yerbaRepository->getAll();
         $origins = $this->yerbaRepository->getOriginsWithId();

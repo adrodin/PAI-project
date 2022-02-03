@@ -11,7 +11,6 @@ class UserRepository extends Repository{
         $user->setId($userData["id"]);
         $user->setRoleId($userData["id_role"]);
         return $user;
-
     }
 
     public function getUserByEmail($email){
@@ -24,14 +23,12 @@ class UserRepository extends Repository{
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if($user == false){
-            //TODO user not found.....
             return null;
         }
         return self::createUser($user);
     }
 
     public function getUserByName($name){
-        //
         $stmt = $this->database->connect()->prepare("
             SELECT * FROM users where name = :name
         ");
@@ -40,7 +37,6 @@ class UserRepository extends Repository{
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if($user == false){
-            //TODO user not found.....
             return null;
         }
         return self::createUser($user);
@@ -110,7 +106,5 @@ class UserRepository extends Repository{
         $stmt->bindParam(':id',$userId,PDO::PARAM_INT);
         $stmt->execute();
     }
-
-
 
 }

@@ -10,7 +10,6 @@ class CommentsRepository extends Repository{
 
 
     public function getCommentsWithRatesByYerbaId($yerbaId){
-
         $stmt = $this->database->connect()->prepare("
             select * from comment c
             left join users u on c.id_user = u.id
@@ -41,7 +40,6 @@ class CommentsRepository extends Repository{
             WHERE id_user = :idUser
             AND id_yerba = :idYerba
         ");
-
         $stmt->bindParam(':idUser',$idUser);
         $stmt->bindParam(':idYerba',$idYerba);
         $stmt->execute();
@@ -93,13 +91,11 @@ class CommentsRepository extends Repository{
             join rating r on comment.id = r.id_comment
             WHERE id_user = :idUser
         ");
-
         $stmt->bindParam(':idUser',$userId);
         $stmt->execute();
 
         $data = $stmt->fetchAll();
         $toReturn = [];
-        $xd = 0;
         foreach ($data as $line){
             $newComment = new Comment($line['id_user'],$line['id_yerba'],$line['content']);
             $newComment->setId($line['id_comment']);
@@ -107,7 +103,6 @@ class CommentsRepository extends Repository{
                                     $line['intensity'],$line['strength'],$line['addons']);
             $newRating->setId($line['r.id']);
             $toReturn[$line['id_comment']] = ['c' => $newComment, 'r' => $newRating];
-
         }
         return $toReturn;
     }
@@ -118,7 +113,6 @@ class CommentsRepository extends Repository{
             join rating r on comment.id = r.id_comment
             WHERE comment.id = :id
         ");
-
         $stmt->bindParam(':id',$id);
         $stmt->execute();
         $data = $stmt->fetch();
@@ -133,7 +127,6 @@ class CommentsRepository extends Repository{
 
     public function editComment($oldOpinion,$general ,$dust,$green,$smoke, $intensity, $strength, $addons, $text){
        // $this->database->connect()->beginTransaction();
-        //ocena średnia
         $stmt = $this->database->connect()->prepare("
             UPDATE average_rating
             SET general = general + :general - :oldGeneral,
@@ -162,7 +155,6 @@ class CommentsRepository extends Repository{
         $stmt->bindParam(':idYerba', $oldOpinion['c']->getIdYerba());
         // 🙃
         $stmt->execute();
-
 
         $stmt = $this->database->connect()->prepare("
             UPDATE rating

@@ -9,12 +9,10 @@ class RankController extends AppController{
         $this->yerbaRepository = new YerbaRepository();
     }
 
-
     public function rank(){
 
         $yerba = $this->yerbaRepository->getAllWithAverageRatings();
         $origins = $this->yerbaRepository->getOriginsWithId();
-
         return $this->render('rank',['yerba'=>$yerba, 'origins'=>$origins]);
     }
 }

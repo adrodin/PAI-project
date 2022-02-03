@@ -36,7 +36,6 @@ class YerbaController extends AppController{
     private function validateInputs($name, $origin, $type, $description){
 
         if(!isset($name)){
-
             $this->message[] = 'Brak nazwy';
             return false;
         }
@@ -52,7 +51,6 @@ class YerbaController extends AppController{
             $this->message[] = 'Brak typu';
             return false;
         }
-
         return true;
     }
 
@@ -88,8 +86,6 @@ class YerbaController extends AppController{
             $yerba = new Yerba($origin,$type,$name,$description,$_FILES['file']['name']);
             $this->yerbaRepository->addYerba($yerba,$addons);
             $this->message[] = "Pomyślnie dodano yerbe";
-            //$this->userRepository->changeAvatar($_FILES['file']['name'],unserialize($_SESSION['user'])->getId());
-            //$this->message[] = "Pomyślnie zmieniono avatar";
         }
         return $this->render('newYerba',['message'=>[$this->message[0]], 'origins'=>$origins, 'types'=>$types]);
     }
