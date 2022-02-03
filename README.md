@@ -10,3 +10,10 @@ The submitted ratings can be edited and deleted. Users can also check the rating
 - PHP
 - postgresql
 - docker
+
+## Requirements
+- Docker version 20.10.8
+- php:7.4.3-fpm-alpine3.11
+- nginx:1.17.8-alpine
+
+
