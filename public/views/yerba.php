@@ -30,44 +30,44 @@
 
                     <div class="rating">
                         <div class="rating-top">
-                            <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getGeneral()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                            <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getGeneral()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                         </div>
                         <img class="flag" src="public/uploads/flags/<?= $origins[$yerba['y']->getOrigin()]->getFlag()?>">
                         <div class="rating-item">
                             <p>Pył</p>
                             <div class="stars">
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getDust()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getDust()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Zielone nuty</p>
                             <div class="stars">
                                 <!--                                <i class="fas fa-star"></i>-->
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getGreen()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getGreen()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Dymne nuty</p>
                             <div class="stars">
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getSmoke()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getSmoke()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Intensywność</p>
                             <div class="stars">
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getIntensity()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getIntensity()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Pobudzenie</p>
                             <div class="stars">
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getStrength()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getStrength()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
                         <div class="rating-item">
                             <p>Dodatki</p>
                             <div class="stars">
-                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  $yerba['r']->getAddons()/$yerba['r']->getNumOfRatings()) ?>/5</p>
+                                <p><?php echo(($yerba['r']->getNumOfRatings() == 0) ? 0 :  round($yerba['r']->getAddons()/$yerba['r']->getNumOfRatings(),2)) ?>/5</p>
                             </div>
                         </div>
 

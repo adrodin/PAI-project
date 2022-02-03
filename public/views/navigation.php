@@ -9,9 +9,9 @@
         <i class="fas fa-medal"></i>
         <a href="rank" class="nav-button">Ranking</a>
     </div>
-    <div class="nav-item">
-        Szukaj
-    </div>
+<!--    <div class="nav-item">-->
+<!--        Szukaj-->
+<!--    </div>-->
     <?php if($user) { ?>
     <div class="nav-item">
         <i class="fas fa-medal"></i>

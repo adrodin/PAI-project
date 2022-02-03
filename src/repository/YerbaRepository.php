@@ -131,7 +131,7 @@ class YerbaRepository extends Repository{
         $stmt = $this->database->connect()->prepare("
             SELECT * from yerba
             join average_rating ar on yerba.id = ar.id_yerba  
-            ORDER BY ar.general;
+            ORDER BY ar.general / (CASE num_of_ratings WHEN 0 THEN NULL ELSE num_of_ratings END) desc nulls last ;
         ");
         $stmt->execute();
         $dataToReturn = [];

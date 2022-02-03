@@ -12,10 +12,10 @@
     <div class="tmp">
     </div>
     <div class="content">
-        <div class="filtr-sort">
-            <p>Filtruj</p>
-            <p>Sortuj</p>
-        </div>
+<!--        <div class="filtr-sort">-->
+<!--            <p>Filtruj</p>-->
+<!--            <p>Sortuj</p>-->
+<!--        </div>-->
         <?php foreach ($yerba as $yerbaId => $data): ?>
 
 
